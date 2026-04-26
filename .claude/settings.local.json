@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm dev:*)",
+      "Bash(git checkout *)",
+      "Bash(git mv *)",
+      "Bash(pnpm add *)",
+      "Bash(pnpm exec *)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "shadcn"
+  ],
+  "enableAllProjectMcpServers": true
+}
