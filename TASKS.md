@@ -4,18 +4,6 @@
 
 ### UI Foundation & Core Contexts
 
-#### 1. Common Components (shadcn/ui)
-- [ ] Install and configure shadcn/ui
-- [ ] Button
-- [ ] Input
-- [ ] Modal / Dialog
-- [ ] Toast / Sonner
-- [ ] Card
-- [ ] Badge
-- [ ] Spinner / Loader
-- [ ] Avatar
-- [ ] Select
-
 #### 2. Theme Context (`src/context/ThemeContext.tsx`)
 - [ ] Create ThemeContext (light / dark / system)
 - [ ] Persist preference to localStorage

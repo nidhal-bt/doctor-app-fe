@@ -65,8 +65,8 @@ This document contains all planned frontend tasks for the project, organized by 
 - [ ] Usage stats display (limits indicator)
 
 ### **Core UI**
-- [ ] Design system / component library setup
-- [ ] Common components (Button, Input, Modal, Toast)
+- [x] Design system / component library setup
+- [x] Common components (Button, Input, Modal, Toast)
 - [ ] Layout components (Navbar, Sidebar, Footer)
 - [ ] Loading states & skeletons
 - [ ] Error pages (404, 500)

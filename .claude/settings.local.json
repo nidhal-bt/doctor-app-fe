@@ -5,11 +5,19 @@
       "Bash(git checkout *)",
       "Bash(git mv *)",
       "Bash(pnpm add *)",
-      "Bash(pnpm exec *)"
+      "Bash(pnpm exec *)",
+      "Bash(pnpm dlx *)",
+      "Bash(pnpm lint *)",
+      "Bash(node -e \"const pkg = require\\('./node_modules/shadcn/package.json'\\); console.log\\(pkg.version, pkg.bin\\)\")",
+      "Bash(node -e ' *)",
+      "mcp__shadcn__get_project_registries",
+      "mcp__shadcn__get_add_command_for_items",
+      "mcp__shadcn__view_items_in_registries",
+      "mcp__shadcn__get_item_examples_from_registries"
     ]
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "shadcn"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }
