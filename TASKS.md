@@ -4,11 +4,6 @@
 
 ### UI Foundation & Core Contexts
 
-#### 2. Theme Context (`src/context/ThemeContext.tsx`)
-- [ ] Create ThemeContext (light / dark / system)
-- [ ] Persist preference to localStorage
-- [ ] Wire `ThemeProvider` into root layout
-
 #### 3. Language Context (`src/context/LanguageContext.tsx`)
 - [ ] Create LanguageContext (en / fr / ar)
 - [ ] Persist preference to localStorage
