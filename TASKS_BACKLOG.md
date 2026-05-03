@@ -138,10 +138,10 @@ This document contains all planned frontend tasks for the project, organized by 
 - [ ] Secure document sharing UI
 
 ### **Multi-language Support**
-- [ ] Setup next-i18next
-- [ ] Arabic (RTL) support
-- [ ] French translation
-- [ ] Language switcher component
+- [x] Setup next-intl (cookie-based, no URL prefix)
+- [x] Arabic (RTL) support
+- [x] French translation
+- [x] Language switcher component
 
 ### **Advanced Analytics (PRO)**
 - [ ] Custom reports page

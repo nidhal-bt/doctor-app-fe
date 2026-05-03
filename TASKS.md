@@ -4,8 +4,10 @@
 
 ### UI Foundation & Core Contexts
 
-#### 3. Language Context (`src/context/LanguageContext.tsx`)
-- [ ] Create LanguageContext (en / fr / ar)
-- [ ] Persist preference to localStorage
-- [ ] Wire `LanguageProvider` into root layout
-- [ ] Add RTL support for Arabic (`dir="rtl"` on `<html>`)
+#### 4. Auth Context (`src/context/AuthContext.tsx`)
+- [ ] Define `User` type and auth state shape
+- [ ] Create `AuthContext` + `AuthProvider` (login, logout, register, token refresh)
+- [ ] Persist auth token (httpOnly cookie strategy via API route or localStorage fallback)
+- [ ] Expose `useAuth` hook
+- [ ] Wire `AuthProvider` into root layout
+- [ ] Add auth guard for protected routes

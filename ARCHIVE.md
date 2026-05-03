@@ -14,6 +14,24 @@ Added all 9 common UI components via the shadcn CLI plus 2 manual files.
 - `modal.tsx` is a zero-cost re-export of `dialog.tsx` — `Dialog` is the source of truth, `Modal` is an alias
 - `Toaster` (sonner) wired into `src/app/layout.tsx` as the global toast provider
 
+## 3. Language Context (next-intl) — 2026-05-03
+
+Added full i18n support using `next-intl` v4 with cookie-based locale switching and RTL for Arabic.
+
+**What was built:**
+- `src/i18n/config.ts` — `locales` array (`en`, `fr`, `ar`), `defaultLocale`, `isRTL()` helper
+- `src/i18n/request.ts` — `getRequestConfig` reads `locale` cookie, validates it, then dynamically imports each namespace JSON for that locale
+- `messages/{en,fr,ar}/{common,auth,nav,doctor,patient,secretary}.json` — namespaced message files (6 namespaces × 3 locales)
+- `src/components/LanguageSwitcher.tsx` — client component; writes `locale` cookie via `js-cookie`, calls `router.refresh()` to trigger server re-render with new locale
+- Updated `src/app/layout.tsx` — calls `getLocale()` + `getMessages()` server-side, sets `lang` and `dir` on `<html>`, wraps tree with `NextIntlClientProvider`
+- `next.config.ts` — wrapped with `createNextIntlPlugin("./src/i18n/request.ts")`
+
+**Key decisions:**
+- Cookie-based locale (no URL prefix) — avoids URL changes and simplifies navigation
+- `dir` set on `<html>` server-side from `isRTL(locale)` — no client flash for RTL
+- Messages split by namespace (not one big file per locale) to allow tree-shaking and easier maintenance
+- `js-cookie` used in the switcher for a clean one-liner; locale validated in `request.ts` against the `locales` array to prevent invalid values
+
 ## 2. Theme Context — 2026-04-26
 
 Added `src/context/ThemeContext.tsx` with light / dark / system support and localStorage persistence.

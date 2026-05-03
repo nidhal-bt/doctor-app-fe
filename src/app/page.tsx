@@ -2,13 +2,17 @@
 
 import { useTheme } from "@/src/context/ThemeContext";
 import { Moon, Sun } from "lucide-react";
+import { LanguageSwitcher } from "@/src/components/LanguageSwitcher";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
+  const t = useTranslations("nav");
 
   return (
     <div>
-      home page
+        {t("home")}
+      <LanguageSwitcher />
       <button
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         className="rounded-full p-2 hover:bg-accent transition-colors"
