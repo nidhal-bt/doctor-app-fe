@@ -5,6 +5,8 @@ import { Geist } from "next/font/google";
 import { cn } from "@/src/lib/utils";
 import { Toaster } from "@/src/components/ui/sonner";
 import { ThemeProvider } from "@/src/context/ThemeContext";
+import { AuthProvider } from "@/src/context/AuthContext";
+import { getServerUser } from "@/src/lib/auth";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import { isRTL } from "@/src/i18n/config";
@@ -24,14 +26,17 @@ export default async function RootLayout({
   const locale = await getLocale();
   const messages = await getMessages();
   const dir = isRTL(locale) ? "rtl" : "ltr";
+  const user = await getServerUser();
 
   return (
     <html lang={locale} dir={dir} className={cn("font-sans", geist.variable)} suppressHydrationWarning>
       <body>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
-            {children}
-            <Toaster />
+            <AuthProvider initialUser={user}>
+              {children}
+              <Toaster />
+            </AuthProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
