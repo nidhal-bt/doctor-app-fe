@@ -14,7 +14,11 @@
       "mcp__shadcn__get_add_command_for_items",
       "mcp__shadcn__view_items_in_registries",
       "mcp__shadcn__get_item_examples_from_registries",
-      "Bash(xargs grep *)"
+      "Bash(xargs grep *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\WORK\\\\work\\\\doctor-app\\\\doctor-app-fe\" -Recurse -Directory -Depth 2)",
+      "Bash(Select-Object FullName)",
+      "Bash(Format-Table -AutoSize)",
+      "PowerShell(ls *)"
     ]
   },
   "enableAllProjectMcpServers": true,
