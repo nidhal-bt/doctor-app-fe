@@ -1,8 +1,8 @@
 "use client";
 
-import { useTheme } from "@/src/context/ThemeContext";
+import { useTheme } from "@/src/context/theme-context";
 import { Moon, Sun } from "lucide-react";
-import { LanguageSwitcher } from "@/src/components/LanguageSwitcher";
+import { LanguageSwitcher } from "@/src/components/language-switcher";
 import { useTranslations } from "next-intl";
 
 export default function Home() {

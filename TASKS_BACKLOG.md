@@ -10,21 +10,21 @@ This document contains all planned frontend tasks for the project, organized by 
 - [x] Initialize Next.js project (TypeScript)
 - [ ] Setup ESLint + Prettier
 - [x] Setup TailwindCSS
-- [ ] Configure environment variables (.env)
+- [x] Configure environment variables (.env)
 - [x] Setup folder structure (app router)
-- [ ] Configure axios/fetch API client
+- [x] Configure axios/fetch API client
 - [ ] Setup global state management (Zustand/Context)
 - [ ] Setup React Query for server state
 - [x] Configure path aliases
 
 ### **Authentication**
-- [ ] Login page
+- [x] Login page
 - [ ] Register page (patient / doctor flows)
 - [ ] Password reset page
-- [ ] Auth token storage (httpOnly cookie or localStorage)
+- [x] Auth token storage (httpOnly cookie or localStorage)
 - [ ] Auth guard (protected routes)
 - [ ] Role-based route redirection
-- [ ] Logout flow
+- [x] Logout flow
 
 ### **User Profile**
 - [ ] View profile page

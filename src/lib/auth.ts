@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import type { User } from "@/src/types/user";
-import { env } from "@/src/config/env";
+import { appEnv } from "@/src/config/env";
 
 export async function getServerUser(): Promise<User | null> {
   const cookieStore = await cookies();
@@ -8,7 +8,7 @@ export async function getServerUser(): Promise<User | null> {
   if (!token) return null;
 
   try {
-    const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/auth/me`, {
+    const res = await fetch(`${appEnv.NEXT_PUBLIC_API_URL}/auth/me`, {
       headers: { Authorization: `Bearer ${token}` },
       cache: "no-store",
     });

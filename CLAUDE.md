@@ -17,14 +17,7 @@ The project uses **pnpm** as the package manager (see `pnpm-workspace.yaml`).
 
 ## Architecture
 
-See **`ARCHITECTURE.md`** for the full tech stack, folder structure, feature folder pattern, rendering strategy, and styling rules.
-
-Quick reference:
-- **Framework:** Next.js (App Router) + React 19
-- **Language:** TypeScript strict mode — path alias `@/*` → repo root
-- **Styling:** Tailwind CSS v4, CSS-first config in `app/globals.css`, no `tailwind.config.js`
-- **Fonts:** Geist via `next/font/google`, exposed as `--font-geist-sans` / `--font-geist-mono`
-- **Components:** Server Components by default — add `"use client"` only for event handlers, hooks, or browser APIs
+See **`ARCHITECTURE.md`** for the full tech stack, folder structure, feature folder pattern, rendering strategy, styling rules, API layer pattern, file naming, and translation key conventions.
 
 ---
 
@@ -32,8 +25,9 @@ Quick reference:
 
 | File | Purpose |
 |------|---------|
-| `ARCHITECTURE.md` | Tech stack, folder structure, rendering strategy, component rules |
-| `.claude/PROJECT.md` | Detailed folder structure with code examples |
+| `ARCHITECTURE.md` | Tech stack, rendering strategy, component/styling/naming rules (concise) |
+| `.claude/PROJECT.md` | Detailed folder structure with feature folder examples |
+| `.claude/API.md` | API layer usage guide — code examples for ApiEndpoint, execute, error handling |
 | `.claude/WORKFLOW.md` | Full workflow rules — when and how to update every tracking file |
 | `TASKS.md` | Active tasks with step-level status |
 | `PROGRESS.md` | Session state: what was done, what's next |

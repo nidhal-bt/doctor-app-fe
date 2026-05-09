@@ -18,7 +18,15 @@
       "Bash(Get-ChildItem -Path \"C:\\\\WORK\\\\work\\\\doctor-app\\\\doctor-app-fe\" -Recurse -Directory -Depth 2)",
       "Bash(Select-Object FullName)",
       "Bash(Format-Table -AutoSize)",
-      "PowerShell(ls *)"
+      "PowerShell(ls *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\WORK\\\\work\\\\doctor-app\\\\doctor-app-fe\\\\src\\\\features\\\\auth\" -Recurse -Force | Select-Object -Property FullName | ForEach-Object { $_.FullName })",
+      "Bash(Get-ChildItem -Path \"C:\\\\WORK\\\\work\\\\doctor-app\\\\doctor-app-fe\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(Get-Content *)",
+      "Bash(curl -s \"https://ui.shadcn.com/r/styles/default/form.json\")",
+      "Bash(Get-ChildItem -Path \"C:\\\\WORK\\\\work\\\\doctor-app\\\\doctor-app-fe\\\\src\\\\app\" -Recurse -File)",
+      "Bash(Sort-Object FullName)",
+      "mcp__ide__getDiagnostics"
     ]
   },
   "enableAllProjectMcpServers": true,

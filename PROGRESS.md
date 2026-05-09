@@ -1,21 +1,19 @@
 # Progress
 
-**Last Updated:** 2026-05-03
+**Last Updated:** 2026-05-09
 
 ## Completed This Session
-- Added all shadcn/ui common components to `src/components/ui/`
-- Fixed `components.json` aliases to use `@/src/` prefix (tsconfig maps `@/*` → repo root)
-- Created `spinner.tsx` manually (Loader2 + animate-spin)
-- Created `modal.tsx` as a re-export alias for dialog components
-- Wired `<Toaster />` into root layout
-- Created `src/context/ThemeContext.tsx` (next-themes wrapper, `useTheme` re-export)
-- Wired `ThemeProvider` into root layout with `suppressHydrationWarning`
-- Added `next-intl` v4.9.1 to `package.json` and wired plugin in `next.config.ts`
-- Created `src/i18n/config.ts` (locales, defaultLocale, `isRTL` helper)
-- Created `src/i18n/request.ts` (reads locale from cookie, loads namespaced messages)
-- Created message files split by namespace: `messages/{en,fr,ar}/{common,auth,nav,doctor,patient,secretary}.json`
-- Updated `src/app/layout.tsx` — reads locale + messages server-side, sets `lang`/`dir` on `<html>`, wraps with `NextIntlClientProvider`
-- Created `src/components/LanguageSwitcher.tsx` (sets `locale` cookie via js-cookie, calls `router.refresh()`)
+- Restructured `messages/{en,fr,ar}/auth.json` from flat camelCase keys to domain-grouped nested structure
+- Convention established: `{domain}.{form}.{field}.{type}.text` (e.g. `login.form.email.label.text`)
+- Added translation naming rule to `CLAUDE.md`
+- Refactored `src/features/auth/components/login-form.tsx` — replaced `useState` inputs with `InputForm` (react-hook-form + shadcn Form), updated all translation keys
+- Added `type` prop to `src/components/input-form.tsx` for password field support
+- Created `src/features/auth/actions/login-action.ts` — first server action; calls `loginApi`, sets httpOnly `token` cookie, redirects to `/`
+- Converted `src/app/(auth)/login/page.tsx` to Server Component; passes `loginAction` as `onSubmit` prop
+- Added Zod schema to `login-form.tsx` via `useLoginSchema` hook + `zodResolver`; validation error messages in EN/AR/FR under `login.form.{field}.error.*`
+- Wired sonner toasts in `onSubmit`: `toast.error` on failure (401), `toast.success` on success; translated in all 3 locales under `login.toast.*`
+- Fixed TypeScript errors in `src/lib/api/` — `validate` generic was `T extends ZodSchema` (returns schema type, not output); corrected to `S extends ZodType` + `z.infer<S>`; replaced deprecated `ZodSchema` with `ZodType` in both `api-validator.ts` and `api-endpoint.ts`
+- Moved File Naming + Translation key rules from `CLAUDE.md` into `ARCHITECTURE.md`; added full API Layer section to `ARCHITECTURE.md`
 
 ## What's Done
 
@@ -24,18 +22,18 @@
 | Common Components (shadcn/ui) | ✅ Done |
 | Theme Context | ✅ Done |
 | Language Context (next-intl, cookie-based, RTL) | ✅ Done |
+| Auth Context | ✅ Done |
+| Env Config (Zod validation) | ✅ Done |
+| Login Page (form + server action + cookie) | ✅ Done |
+| API Layer (fetch client + endpoint pattern) | ✅ Done |
 
-## Current Task — Auth Context (`src/context/AuthContext.tsx`)
+## Current Task — Auth Guard
 
-**Approach:** JWT-based auth stored in an httpOnly cookie (set by API). Context holds the decoded user + role. Auth guard redirects unauthenticated users. Role-based redirect on login.
+**Approach:** Middleware or layout-level server redirect for unauthenticated users. Role-based redirect on login so each role lands on its own dashboard.
 
 ### Steps
-- [ ] Define `User` type and auth state shape
-- [ ] Create `AuthContext` + `AuthProvider` (login, logout, register, token refresh)
-- [ ] Persist auth token (httpOnly cookie via API route or localStorage fallback)
-- [ ] Expose `useAuth` hook
-- [ ] Wire `AuthProvider` into root layout
 - [ ] Add auth guard for protected routes
+- [ ] Role-based redirect on login
 
 ## Next Task
-Login page + Register page (Authentication flows)
+Auth Guard + Role-based redirect on login
