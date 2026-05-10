@@ -20,3 +20,14 @@
 - Added sonner toast notifications to `onSubmit` — `toast.error` on 401, `toast.success` on 200; toast messages translated in all 3 locales under `login.toast.*`
 - Fixed TypeScript errors in `src/lib/api/` — corrected `validate` generic signature and replaced deprecated `ZodSchema` with `ZodType` (Zod v4)
 - Moved File Naming + Translation rules into `ARCHITECTURE.md`; cleaned `CLAUDE.md`
+- Created `src/components/icons.tsx` — centralized lucide-react icon map
+- Created `src/components/password-input.tsx` — forwardRef input with show/hide toggle
+- Moved `input-form.tsx` → `src/components/form/input-form.tsx`; fixed relative imports
+- Created `src/components/form/password-input-form.tsx` — FormField wrapper for PasswordInput
+- Created `src/components/form/phone-input-form.tsx` — FormField wrapper for PhoneInput
+- Created `src/components/phone-input.tsx` — country-selector phone input (react-phone-number-input)
+- Added shadcn `command` and `scroll-area` components
+- Created full signup flow: `signup-form.tsx`, `signup-api.ts`, `signup-action.ts`, `register/page.tsx`
+- Added `register.*` translation keys to all 3 locales in `auth.json`
+- Updated `login-form.tsx` to use `PasswordInputForm` for password field
+- Updated `signup-form.tsx` to use `PasswordInputForm` + `PhoneInputForm`

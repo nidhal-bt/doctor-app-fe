@@ -1,5 +1,6 @@
 # Archive Index
 
+- [9. Signup Flow & Form Component Library](ARCHIVE.md#9-signup-flow--form-component-library--2026-05-10) — Icons, PasswordInput, PhoneInput, form/ wrappers, signup form + action + API, register translations
 - [8. API Layer](ARCHIVE.md#8-api-layer--2026-05-09) — FetchClient + ApiEndpoint + validate + ApiError; ZodType fix; transform enforces camelCase at API boundary
 - [7. Login Form Validation & Toast Notifications](ARCHIVE.md#7-login-form-validation--toast-notifications--2026-05-06) — Zod schema via useLoginSchema hook + zodResolver; sonner toasts on success/401; all messages translated in EN/AR/FR
 - [6. Login Form, Translations & Server Action](ARCHIVE.md#6-login-form-translations--server-action--2026-05-05) — auth.json restructured to field-first dot-path keys; LoginForm uses InputForm+RHF; loginAction server action sets httpOnly cookie

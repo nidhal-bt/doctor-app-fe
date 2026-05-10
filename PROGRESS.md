@@ -1,19 +1,23 @@
 # Progress
 
-**Last Updated:** 2026-05-09
+**Last Updated:** 2026-05-10
 
 ## Completed This Session
-- Restructured `messages/{en,fr,ar}/auth.json` from flat camelCase keys to domain-grouped nested structure
-- Convention established: `{domain}.{form}.{field}.{type}.text` (e.g. `login.form.email.label.text`)
-- Added translation naming rule to `CLAUDE.md`
-- Refactored `src/features/auth/components/login-form.tsx` — replaced `useState` inputs with `InputForm` (react-hook-form + shadcn Form), updated all translation keys
-- Added `type` prop to `src/components/input-form.tsx` for password field support
-- Created `src/features/auth/actions/login-action.ts` — first server action; calls `loginApi`, sets httpOnly `token` cookie, redirects to `/`
-- Converted `src/app/(auth)/login/page.tsx` to Server Component; passes `loginAction` as `onSubmit` prop
-- Added Zod schema to `login-form.tsx` via `useLoginSchema` hook + `zodResolver`; validation error messages in EN/AR/FR under `login.form.{field}.error.*`
-- Wired sonner toasts in `onSubmit`: `toast.error` on failure (401), `toast.success` on success; translated in all 3 locales under `login.toast.*`
-- Fixed TypeScript errors in `src/lib/api/` — `validate` generic was `T extends ZodSchema` (returns schema type, not output); corrected to `S extends ZodType` + `z.infer<S>`; replaced deprecated `ZodSchema` with `ZodType` in both `api-validator.ts` and `api-endpoint.ts`
-- Moved File Naming + Translation key rules from `CLAUDE.md` into `ARCHITECTURE.md`; added full API Layer section to `ARCHITECTURE.md`
+- Created `src/components/icons.tsx` — centralized lucide-react icon exports (Eye, EyeOff, Loader2, Sun, Moon, etc.)
+- Created `src/components/password-input.tsx` — forwardRef input with show/hide toggle; uses Icons.hide / Icons.view
+- Added `InputProps` type export to `src/components/ui/input.tsx`
+- Moved `input-form.tsx` to `src/components/form/`; fixed relative imports (`../ui/form`, `../ui/input`)
+- Created `src/components/form/password-input-form.tsx` — FormField wrapper for PasswordInput
+- Created `src/components/form/phone-input-form.tsx` — FormField wrapper for PhoneInput
+- Created `src/components/phone-input.tsx` — full phone number input with country selector (react-phone-number-input + shadcn command/popover/scroll-area)
+- Added shadcn `command` and `scroll-area` components via CLI
+- Created `src/features/auth/api/signup-api.ts` — ApiEndpoint for POST /auth/register
+- Created `src/features/auth/actions/signup-action.ts` — server action; calls signupApi, sets token cookie, redirects
+- Created `src/features/auth/components/signup-form.tsx` — Zod schema with refine (confirmPassword match), all 6 fields
+- Created `src/app/(auth)/register/page.tsx` — Server Component wiring SignupForm + signupAction
+- Added `register.*` translation keys to all 3 locales in `auth.json`
+- Updated `login-form.tsx` and `signup-form.tsx` to use `PasswordInputForm` for password fields
+- Updated `signup-form.tsx` to use `PhoneInputForm` for phone field
 
 ## What's Done
 
@@ -26,6 +30,8 @@
 | Env Config (Zod validation) | ✅ Done |
 | Login Page (form + server action + cookie) | ✅ Done |
 | API Layer (fetch client + endpoint pattern) | ✅ Done |
+| Register Page (form + server action + cookie) | ✅ Done |
+| Form Component Library (InputForm, PasswordInputForm, PhoneInputForm) | ✅ Done |
 
 ## Current Task — Auth Guard
 

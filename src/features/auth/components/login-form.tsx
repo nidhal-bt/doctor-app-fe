@@ -14,7 +14,8 @@ import {
 } from "@/src/components/ui/card";
 import { Button } from "@/src/components/ui/button";
 import { Form } from "@/src/components/ui/form";
-import { InputForm } from "@/src/components/input-form";
+import { InputForm } from "@/src/components/form/input-form";
+import { PasswordInputForm } from "@/src/components/form/password-input-form";
 import { toast } from "sonner";
 
 function useLoginSchema() {
@@ -72,12 +73,10 @@ export function LoginForm({ onLogin }: LoginFormProps) {
               label={t("login.form.email.label.text")}
               placeholder={t("login.form.email.placeholder.text")}
             />
-            <InputForm
+            <PasswordInputForm
               control={form.control}
               name="password"
-              type="password"
               label={t("login.form.password.label.text")}
-              placeholder={t("login.form.password.placeholder.text")}
             />
           </CardContent>
           <CardFooter>

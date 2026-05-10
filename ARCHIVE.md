@@ -1,5 +1,30 @@
 # Archive
 
+## 9. Signup Flow & Form Component Library — 2026-05-10
+
+**What was built:**
+- `src/components/icons.tsx` — centralized lucide-react icon map; provides `Icons.view` (Eye) and `Icons.hide` (EyeOff) used by PasswordInput; follows shadcn icon pattern
+- `src/components/password-input.tsx` — forwardRef wrapper around `Input` with show/hide toggle button; imports `InputProps` from `ui/input`; toggle disabled when field is empty or disabled
+- `src/components/ui/input.tsx` — added `export type InputProps = React.ComponentProps<"input">` so consumers can import the type directly
+- `src/components/form/` — new directory grouping all react-hook-form field wrappers; `input-form.tsx` moved here (was at root), relative imports corrected to `../ui/*`
+- `src/components/form/password-input-form.tsx` — `FormField` wrapper for `PasswordInput`; same props shape as `InputForm` minus `type`
+- `src/components/form/phone-input-form.tsx` — `FormField` wrapper for `PhoneInput`; passes `field.onChange` directly (RPNInput.Value is a string, compatible with react-hook-form)
+- `src/components/phone-input.tsx` — full country-selector phone input using `react-phone-number-input`; country dropdown built from shadcn `Command` + `Popover` + `ScrollArea`; renders flags via `react-phone-number-input/flags`
+- shadcn components added: `command`, `scroll-area` (popover already existed)
+- `src/features/auth/api/signup-api.ts` — `ApiEndpoint` for POST `/auth/register`; body schema includes firstName, lastName, email, password, phone
+- `src/features/auth/actions/signup-action.ts` — server action; calls `signupApi.execute()`, sets httpOnly `token` cookie, redirects to `/`
+- `src/features/auth/components/signup-form.tsx` — Zod schema via `useSignupSchema` hook; `refine` checks `confirmPassword === password`; uses `InputForm`, `PasswordInputForm`, `PhoneInputForm`
+- `src/app/(auth)/register/page.tsx` — Server Component passing `signupAction` as `onSignup` prop
+- Updated `messages/{en,fr,ar}/auth.json` with all `register.*` translation keys (labels, placeholders, errors, toasts)
+- Updated `login-form.tsx` and `signup-form.tsx` to use `PasswordInputForm` for password fields
+
+**Key decisions:**
+- All form-field wrappers live in `src/components/form/` — colocates them, separates from raw UI primitives in `ui/`
+- `tsconfig.json` maps `@/*` → `./` (repo root), so all imports use `@/src/components/...` — enforced consistently across all new files
+- `PhoneInputForm` passes `field.onChange` directly without wrapping — `RPNInput.Value` is a branded string, compatible with react-hook-form's `onChange` which accepts any value
+- `confirmPassword` is stripped before calling `signupApi` via destructuring (`const { confirmPassword: _, ...apiData } = data`) — never sent to the server
+- Icons centralized in `icons.tsx` following shadcn convention — one import for all icon usage across the app
+
 ## 8. API Layer — 2026-05-09
 
 **What was built:**

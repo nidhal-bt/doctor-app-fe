@@ -49,5 +49,6 @@ module.exports = {
     'subject-empty': [2, 'never'],     // description is required
     'subject-full-stop': [2, 'never'], // no period at end
     'header-max-length': [2, 'always', 120], // max commit message length
+    'body-max-line-length': [1, 'always', 300], // body lines should be wrapped at 300 chars
   },
 };
