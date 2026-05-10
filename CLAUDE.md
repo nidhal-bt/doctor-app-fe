@@ -26,6 +26,7 @@ See **`ARCHITECTURE.md`** for the full tech stack, folder structure, feature fol
 | File | Purpose |
 |------|---------|
 | `ARCHITECTURE.md` | Tech stack, rendering strategy, component/styling/naming rules (concise) |
+| `.claude/FOLDER_STRUCTURE.md` | Live folder structure of the project |
 | `.claude/PROJECT.md` | Detailed folder structure with feature folder examples |
 | `.claude/API.md` | API layer usage guide — code examples for ApiEndpoint, execute, error handling |
 | `.claude/WORKFLOW.md` | Full workflow rules — when and how to update every tracking file |

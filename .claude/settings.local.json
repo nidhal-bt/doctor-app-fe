@@ -26,7 +26,14 @@
       "Bash(curl -s \"https://ui.shadcn.com/r/styles/default/form.json\")",
       "Bash(Get-ChildItem -Path \"C:\\\\WORK\\\\work\\\\doctor-app\\\\doctor-app-fe\\\\src\\\\app\" -Recurse -File)",
       "Bash(Sort-Object FullName)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(Get-ChildItem -Path \"C:\\\\WORK\\\\work\\\\doctor-app\\\\doctor-app-fe\\\\src\\\\app\\\\\\(dashboard\\)\" -Recurse -Force)",
+      "Bash(Select-Object -Property FullName, PSIsContainer)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\WORK\\\\work\\\\doctor-app\\\\doctor-app-fe\\\\src\\\\app\\\\\\(dashboard\\)\" -Recurse | ForEach-Object { $_.FullName })",
+      "Bash(Get-ChildItem -Recurse \"C:\\\\WORK\\\\work\\\\doctor-app\\\\doctor-app-fe\\\\src\\\\app\\\\\\(dashboard\\)\")",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Sort-Object PSIsContainer -Descending)",
+      "PowerShell(Get-ChildItem -Recurse \"C:\\\\WORK\\\\work\\\\doctor-app\\\\doctor-app-fe\\\\src\\\\app\" | ForEach-Object { $_.FullName })"
     ]
   },
   "enableAllProjectMcpServers": true,
