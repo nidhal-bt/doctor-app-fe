@@ -6,7 +6,7 @@ import { cn } from "@/src/lib/utils";
 import { Toaster } from "@/src/components/ui/sonner";
 import { ThemeProvider } from "@/src/context/theme-context";
 import { AuthProvider } from "@/src/context/auth-context";
-import { getServerUser } from "@/src/lib/auth";
+import { getServerUser } from "@/src/features/auth/server/get-server-user";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import { isRTL } from "@/src/i18n/config";
@@ -33,7 +33,8 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
-            <AuthProvider initialUser={user}>
+            {/* TODO: we need to fix this line */}
+            <AuthProvider initialUser={user?.success && user.user ? user.user : null}>
               {children}
               <Toaster />
             </AuthProvider>

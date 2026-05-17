@@ -1,13 +1,14 @@
 import { appEnv } from "@/src/config/env";
 import { ApiError } from "./api-error";
 
-
 interface FetchOptions {
   method: "GET" | "POST" | "PATCH" | "DELETE";
   url: string;
   body?: unknown;
   params?: Record<string, string | number | undefined>;
   headers?: Record<string, string>;
+  cache?: RequestCache;
+  next?: { revalidate?: number; tags?: string[] };
 }
 
 export class FetchClient {
@@ -19,7 +20,7 @@ export class FetchClient {
   }
 
   static async request(options: FetchOptions): Promise<unknown> {
-    const { method, url, body, params, headers } = options;
+    const { method, url, body, params, headers, cache, next } = options;
 
     const urlObj = new URL(`${this.getBaseUrl()}/api${url}`);
     if (params) {
@@ -37,6 +38,8 @@ export class FetchClient {
         ...headers,
       },
       ...(body ? { body: JSON.stringify(body) } : {}),
+      ...(cache ? { cache } : {}),
+      ...(next ? { next } : {}),
     });
 
     if (!res.ok) {

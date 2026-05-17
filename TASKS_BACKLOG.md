@@ -13,13 +13,13 @@ This document contains all planned frontend tasks for the project, organized by 
 - [x] Configure environment variables (.env)
 - [x] Setup folder structure (app router)
 - [x] Configure axios/fetch API client
-- [ ] Setup global state management (Zustand/Context)
+- [x] Setup global state management (Auth Context + Theme Context cover MVP needs)
 - [ ] Setup React Query for server state
 - [x] Configure path aliases
 
 ### **Authentication**
 - [x] Login page
-- [ ] Register page (patient / doctor flows)
+- [x] Register page (unified form; separate patient/doctor flows not needed for MVP)
 - [ ] Password reset page
 - [x] Auth token storage (httpOnly cookie or localStorage)
 - [ ] Auth guard (protected routes)
@@ -151,5 +151,5 @@ This document contains all planned frontend tasks for the project, organized by 
 
 ---
 
-**Last Updated:** 2026-04-10
+**Last Updated:** 2026-05-17
 **Project:** Doctor Appointment Platform - Frontend

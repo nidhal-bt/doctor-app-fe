@@ -1,5 +1,34 @@
 # Archive
 
+## 11. Folder Structure Refactor & Routes Constants — 2026-05-17
+
+**What was built:**
+- Moved `src/types/user.ts` → `src/features/user/types/type.ts`; converted `Role` string union to a proper `IUserRole` enum (`admin | doctor | patient | secretary`); added `ADMIN` role; `IUser` interface now lives co-located in the feature folder
+- Moved `src/lib/auth.ts` → `src/features/auth/server/get-server-user.ts`; rewrote internals to call `currentUserApi.execute()` instead of a raw fetch; errors are now caught and returned as `{ success: false, message, statusCode }` instead of `null`
+- Added `src/features/auth/api/current-user-api.ts` — GET `/auth/me` endpoint using the `ApiEndpoint` pattern; response schema includes `phone`, `avatarUrl`, `role` (validated against the `IUserRole` enum), `createdAt`
+- Added `src/constants/routes.ts` — `APP_ROUTES` const covering all public (`/`, `/doctors`, `/about`, `/faq`, `/pricing`), auth (`/login`, `/register`, `/forgot-password`, `/reset-password`), doctor (`/d/dr/*`), patient (`/d/pt/*`), secretary (`/d/sc/*`), and shared dashboard routes (`/d/profile`, `/d/settings`, `/d/billing`)
+- Added `src/middleware.ts` — placeholder with two TODO comments (auth redirect, role-based redirect); matcher currently hardcoded to `/faq` pending full implementation
+
+**Key decisions:**
+- User types moved to `src/features/user/` to keep user domain self-contained; `src/types/` directory removed
+- `getServerUser()` moved to `src/features/auth/server/` so all server-only auth utilities are co-located under the auth feature
+- `APP_ROUTES` uses `as const` so every route value is a narrowed string literal — enables type-safe route references across the app
+- Middleware added as a placeholder to establish the file before implementing guards; hardcoded `/faq` matcher avoids breaking any existing routes during development
+
+---
+
+## 10. Sidebar Layout & Dashboard Layout — 2026-05-10
+
+**What was built:**
+- Installed shadcn sidebar primitive via CLI; also pulled in `separator`, `tooltip`, `sheet`, and `src/hooks/use-mobile.ts` as dependencies → `src/components/ui/sidebar.tsx`
+- `src/components/layout/components/sidebar-layout.tsx` — `SidebarLayout` component; props: `navigation: React.ReactNode` (rendered in `SidebarContent`) + `children: React.ReactNode` (rendered in `SidebarInset`); hardcoded sidebar shell: Stethoscope logo header + collapsible icon sidebar (`collapsible="icon"`) + `SidebarRail` for drag resize + mock user footer (`Dr. John Doe / General Practitioner`)
+- `src/components/layout/dashboard-layout.tsx` — `DashboardLayout` wrapper; accepts `navigation` and `children`; composes a mock workspace switcher (`City Medical Center / Hospital` with `Building2` icon) above the passed navigation in the sidebar content area; adds a `h-14` header bar with `SidebarTrigger` inside `SidebarInset`; both `SidebarLayout` and `DashboardLayout` are `"use client"` (sidebar primitives use hooks internally)
+
+**Key decisions:**
+- `SidebarLayout` is role-agnostic — it has no hardcoded nav; each role passes its own nav items via the `navigation` prop; `DashboardLayout` prepends the workspace switcher to whatever nav is passed in, keeping the switcher shared across roles without modifying `SidebarLayout`
+- Used `render={<a href="#" />}` on `SidebarMenuButton` instead of `asChild` — this project uses `@base-ui/react`'s `useRender` / `render` prop pattern, not Radix UI's `asChild` pattern; `asChild` does not exist on these components
+- `navigation` made optional in `DashboardLayout` (typed `React.ReactNode?`) so pages without nav still render correctly
+
 ## 9. Signup Flow & Form Component Library — 2026-05-10
 
 **What was built:**

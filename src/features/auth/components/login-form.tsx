@@ -35,10 +35,13 @@ function useLoginSchema() {
 type LoginFormData = z.infer<ReturnType<typeof useLoginSchema>>;
 
 interface LoginFormProps {
-  onLogin: (data: LoginFormData) => Promise<{ success: boolean; message?: string; statusCode?: number }>;
+  onLogin: (
+    data: LoginFormData,
+  ) => Promise<{ success: boolean; message?: string; statusCode?: number }>;
+  onSuccess?: () => void;
 }
 
-export function LoginForm({ onLogin }: LoginFormProps) {
+export function LoginForm({ onLogin, onSuccess }: LoginFormProps) {
   const t = useTranslations("auth");
   const schema = useLoginSchema();
   const form = useForm<LoginFormData>({
@@ -55,6 +58,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
     }
 
     toast.success(t("login.toast.success.text"));
+    onSuccess?.();
   };
 
   return (

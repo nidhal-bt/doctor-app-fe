@@ -1,12 +1,13 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import Cookies from "js-cookie";
+
 import { useRouter } from "next/navigation";
-import type { User } from "@/src/types/user";
+import { IUser } from "../features/user/types/type";
+import { logoutAction } from "../features/auth/actions/logout-action";
 
 interface AuthContextValue {
-  user: User | null;
+  user: IUser | null;
   isAuthenticated: boolean;
   logout: () => void;
 }
@@ -14,22 +15,24 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 interface AuthProviderProps {
-  initialUser: User | null;
+  initialUser: IUser | null;
   children: React.ReactNode;
 }
 
 export function AuthProvider({ initialUser, children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | null>(initialUser);
+  const [user, setUser] = useState<IUser | null>(initialUser);
   const router = useRouter();
 
-  function logout() {
+  async function logout() {
+    await logoutAction();
     setUser(null);
-    Cookies.remove("token");
     router.push("/");
   }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: user !== null, logout }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated: user !== null, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

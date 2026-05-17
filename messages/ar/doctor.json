@@ -2,5 +2,6 @@
   "title": "طبيب",
   "patients": "المرضى",
   "appointments": "المواعيد",
-  "schedule": "الجدول الزمني"
+  "schedule": "الجدول الزمني",
+  "availability": "التوفر"
 }

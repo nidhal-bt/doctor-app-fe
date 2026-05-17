@@ -2,6 +2,11 @@ import { z, ZodType } from "zod";
 import { validate } from "./api-validator";
 import { FetchClient } from "./fetch-client";
 
+interface RequestOptions {
+  headers?: Record<string, string>;
+  cache?: RequestCache;
+  next?: { revalidate?: number; tags?: string[] };
+}
 
 interface EndpointConfig<
   TResponse extends ZodType,
@@ -27,11 +32,35 @@ export class ApiEndpoint<
     this.config = config;
   }
 
+  /**
+   * Executes the API call.
+   *
+   * @param params - Request data: body for POST/PATCH, query params for GET, undefined for no input.
+   * @param options - Optional fetch config: headers, cache, next (revalidation/tags).
+   * @returns Validated and transformed response.
+   *
+   * @example
+   * // No params
+   * await getMeApi.execute();
+   *
+   * // With body (POST)
+   * await loginApi.execute({ email, password });
+   *
+   * // With query params (GET)
+   * await getDoctorsApi.execute({ page: 1, limit: 10 });
+   *
+   * // With options
+   * await getMeApi.execute(undefined, {
+   *   headers: { Authorization: `Bearer ${token}` },
+   *   cache: "no-store",
+   * });
+   */
   async execute(
-    ...args: TRequest extends void ? [] : [params: TRequest]
+    params?: TRequest extends void ? undefined : TRequest,
+    options?: RequestOptions,
   ): Promise<TOutput> {
-    const { endpoint, method, responseSchema, transform, bodySchema } = this.config;
-    const params = args[0] as TRequest | undefined;
+    const { endpoint, method, responseSchema, transform, bodySchema } =
+      this.config;
 
     if (bodySchema && params) {
       validate(params, bodySchema, `Request ${method} ${endpoint}`);
@@ -43,9 +72,14 @@ export class ApiEndpoint<
       ...(method === "GET"
         ? { params: params as Record<string, string | number | undefined> }
         : { body: params }),
+      ...options,
     });
 
-    const validated = validate(raw, responseSchema, `Response ${method} ${endpoint}`);
+    const validated = validate(
+      raw,
+      responseSchema,
+      `Response ${method} ${endpoint}`,
+    );
     return transform(validated);
   }
 }
